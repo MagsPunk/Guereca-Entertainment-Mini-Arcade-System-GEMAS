@@ -1,0 +1,728 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD26\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">11/5/2026</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">7:15:10 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc" class="file"><acronym title="C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc">C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">96</td></tr>
+</table>
+</td>
+</table><a name="IDNNEHMYOVT22HMAWPJ3U0TOXTOO3QZG3VCX0XUQOVYPDJJXRWYHXH"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDUN2EIFXYSIAJDWB0T2YZ0J4CDNSOILQHROM3DTTOYACIEX2FW5J">Clearance Constraint (Gap=0.15mm) (IsPad And InComponent('U2')),(IsPad And InComponent('U2'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID1UNN4IE50RGCGXMIQP3MWB52DEBLG4U3O4NPJ5ILAJLK5ABHJ42O">Clearance Constraint (Gap=0.19mm) (IsPad And InComponent('J2') And (Hole = 0)),(IsPad And InComponent('J2') And (Hole = 0))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDDYPRIDJISWWVBOC1J2X4RKGXKMAEFY0TH1UABIPCN5OBB5KPTSQP">Clearance Constraint (Gap=0.29mm) (HasPad('J4-1') Or HasPad('J4-2') Or HasPad('J4-3') Or HasPad('J4-4') Or HasPad('J4-5') Or HasPad('J4-6') Or HasPad('J4-7') Or HasPad('J4-8')),(HasPad('J4-1') Or HasPad('J4-2') Or HasPad('J4-3') Or HasPad('J4-4') Or HasPad('J4-5') Or HasPad('J4-6') Or HasPad('J4-7') Or HasPad('J4-8'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDJSVTXX2UGK2KGEBBHMHR5QBC2BAZEBWMP114HGKEJ1M4HO12SGE">Clearance Constraint (Gap=0.24mm) (HasPad('J4-S3')),(HasPad('J4-SW-B'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFC22BEERSZFTEQSAYG23CVQVEKLV4LITG1DPD4OCJV2CIQW0AV1">Clearance Constraint (Gap=0.17mm) (IsPad And InComponent('J2') And (Hole = 0.65)),(IsPad And InComponent('J2') And (Hole = 0))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID5NFLROUTPEZBMBPSSU2Z3FYO3G4XHVVN0NJEE3L2F4KD4DHNZMHM">Clearance Constraint (Gap=0.39mm) (IsPad And InComponent('CR1')),(IsPad And InComponent('CR1'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDVSQ5SNKAUSA3DZB43FMUZ0AD0GXHMO4VZSMQTVPIRMDBFHPDH51H">Clearance Constraint (Gap=0.29mm) (IsPad And InComponent('S2')),(IsPad And InComponent('S2'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDK0TJOCVTUPIOESOHSTTWYSAMOCCPM54ONRGVHVKAMMYNWL0EOKY">Clearance Constraint (Gap=0.2mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDYLLBBF33VQYEGKW3BNN23V1B4DAPZFBXDRNHZHBLHCDTURHABJHF">Clearance Constraint (Gap=0.19mm) (IsPad And InComponent('U1')),(IsPad And InComponent('U1'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDIT2CRJ5RXKEIKBCRQ5Y1BSJY41PPFBUULWMLKCR1X5K1ODFRZB">Clearance Constraint (Gap=0.16mm) (IsPad And InComponent('J3')),(IsPad And InComponent('J3'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDYHCWXUBA0GS1MAUT1B3JKLDQYKPEBPOK3TJYGEMAU5EARGLUFNTI">Clearance Constraint (Gap=0.2mm) (IsPad And InComponent('U4')),(IsPad And InComponent('U4'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDK41BFGITL2PMELHPTLHY20PGEMFEIJKET4Q5OEEA3PE4MHSK4OMO">Clearance Constraint (Gap=0.14mm) (HasPad('J4-8')),(HasPad('J4-S1'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDACJPDF42N14OGFTI1SQA35BWBIUCPNR2MHNZ5TF1UJOXEZMIL5JE">Clearance Constraint (Gap=0.29mm) (IsPad And InComponent('S10')),(IsPad And InComponent('S10'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXBRWDCGPOJDUHSRATZ3ZUXN50KNEDZ0OX3DV11HSHMGPJJMAF21B">Clearance Constraint (Gap=0.29mm) (IsPad And InComponent('S7')),(IsPad And InComponent('S7'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDBNHUAYTARH01PWLU05WNYRP5FNPA2Z1J2HX1IZHY52S51TPWETBD">Clearance Constraint (Gap=0.29mm) (IsPad And InComponent('S9')),(IsPad And InComponent('S9'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDJQ5OCDGGZPLKK1X10JO3IH5BEMW1EG5BTWG5HPNQXFHC4HEFWIPB">Clearance Constraint (Gap=0.2mm) (IsTrack And InNet('VBAT') And InRegionRelative(670,1290,707,1335)),(IsPad And InComponent('U1'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDEESC1ORZOWA5H4GWY1UYOQ0Z0D1HXMD0EVLTO3KEAVULPGYL1EYL">Clearance Constraint (Gap=0.29mm) (IsPad And InComponent('S8')),(IsPad And InComponent('S8'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYPH1CEWY404IO51D4AKPDHUTBPSVW12UUUW2VBKVULVO0QYVOGE">Clearance Constraint (Gap=0.29mm) (IsPad And InComponent('S11')),(IsPad And InComponent('S11'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID1POBREMO0GEVO54GRBX2ZIT05F34MC2UYSHWAGJ0JVJ0ABTPK3RI">Clearance Constraint (Gap=0.29mm) (IsPad And InComponent('S3')),(IsPad And InComponent('S3'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDDZ3DFKLAR0OCHISBIPGSHKTYYOOFS4OXNE043UHCRBI11HGNG11L">Clearance Constraint (Gap=0.29mm) (IsPad And InComponent('S4')),(IsPad And InComponent('S4'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDSDG3PGGGIIS0GJTYRR4K4V2ACIDMTQT351OQ4OBUBVSIYJBKM2FN">Clearance Constraint (Gap=0.29mm) (IsPad And InComponent('S6')),(IsPad And InComponent('S6'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDHAXPKIQZVQG1IBWECBI4VH5URLCA5DQU3GTBAZND4W0PNMQF0UC">Clearance Constraint (Gap=0.29mm) (IsPad And InComponent('S5')),(IsPad And InComponent('S5'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWCYGDOFTOMKMHD0TTMPZS1VBXEIKT4D0EI3WK2BSJO1SE1U20UJK">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDNHO0TMEQTK3UPWKPMIHYXMMSXGRKLUROVJENMSF2A4OITZDIT0FK">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">95</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDM2FW4JKUBKDXIT20JXMONGEPPKW40X3BNS3BDDPDDDYHNN5C2HG">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDLN2OJIY4DUMGKSLASEUXTWABYOWAUMUAV22Q2AITPTKBNCACCLFM">Width Constraint (Min=0.2mm) (Max=1.5mm) (Preferred=0.4mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDTSOADJVWFHWRJHLWI1S2KO4JCGRTUFPWDEWORS1W1TXI4FLZINH">Width Constraint (Min=0.2mm) (Max=1.5mm) (Preferred=0.4mm) (IsTrack And InNet('VBAT') And InRegionRelative(670,1290,707,1335))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQ033RRAGYJQKNAEKCNXOT5140BWFA3TRI5SH3FFJNVMTRT3CE3DM">Width Constraint (Min=0.2mm) (Max=1.5mm) (Preferred=0.8mm) (InNetClass('POWER') Or InNetClass('REG_SW'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWC31OGFXKC3GLDYW040BRZXOZD13ND2K34F2CYEB4O5VLHFQEMBF">Width Constraint (Min=0.4mm) (Max=0.8mm) (Preferred=0.5mm) (InNetClass('SPEAKER'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID1BMRVLG00SYLC0JFHP4KSJKUOHSQ4I23QRFWEMZIZQHQMWSDBEO">Width Constraint (Min=0.4mm) (Max=0.5mm) (Preferred=0.5mm) (InNetClass('BACKLIGHT'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDVWKVC5TPPJDGLDOVRSM531KFEO4RHMPLCBAF5XGOSYDN3NFTFMDG">Routing Topology Rule(Topology=Shortest) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDSAHXKLPNEIIAEEPMQEFMOIAUQMFAT3YMGWLVWENSQOOJQDVGER3N">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDQOAV1ZUIVRFPL4OXP0STNDOFDLAQV2C5KFBFPZNLIMBZQMG002QP">Hole Size Constraint (Min=0.025mm) (Max=3.3mm) (HasPad('PTH1-1') Or HasPad('PTH2-1') Or HasPad('PTH3-1') Or HasPad('PTH4-1'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDDYXUARRLBN1LDSE3KZ4DR2TQJLUC1DZQKCKVSFHICUTNCXP5RIWM">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDYOFW3X5DVIWQKPTBYL4ACEGDWILKHBOTEXBFNREAB2PDNRSWXA5H">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYA3OIZXPPCCEPU5F4HVBIGIFWMYWP5FEOFDANYEUUIEEXUN4L0JG">Minimum Solder Mask Sliver (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWX1BHVHTF3QYEZMPOCEQPUQAPB04Z5HIMUIEBQFVEHHCNMHIW2ZN">Silk To Solder Mask (Clearance=0.15mm) (IsPad),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0NOUOJYTTYKIB0EBZ5JLTEZNYKFLR1DGOOVYGOLL0AR3K1K30VBK">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDHK5UULJAY3KWQVUFII4FLVBUH02MIHZGIQPTVGIZECIMQIVX32O">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDECT4DXG5CYQIJTQ2BEN4DVKFUBBWFLYJFU4RA1FAOVPU5EE0PWNP">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">96</td>
+</tr>
+</table><br><a name="IDNHO0TMEQTK3UPWKPMIHYXMMSXGRKLUROVJENMSF2A4OITZDIT0FK"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4548.267mil|Location2.X=4682.914mil|Location1.Y=3405.552mil|Location2.Y=3927.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4548.267mil|Location2.X=4682.914mil|Location1.Y=3405.552mil|Location2.Y=3927.401mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C18-1(67.077mm,50.927mm) on Top Layer And Pad BOOT-4(68.997mm,39.422mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4619.922mil|Location2.X=4862.109mil|Location1.Y=3018.521mil|Location2.Y=3468.544mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4619.922mil|Location2.X=4862.109mil|Location1.Y=3018.521mil|Location2.Y=3468.544mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad BOOT-4(68.997mm,39.422mm) on Multi-Layer And Pad EN-3(73.497mm,29.643mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4054.858mil|Location2.X=4382.6mil|Location1.Y=3118.385mil|Location2.Y=3176.417mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4054.858mil|Location2.X=4382.6mil|Location1.Y=3118.385mil|Location2.Y=3176.417mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C10-1(54.794mm,32.102mm) on Top Layer And Pad C9-1(61.219mm,32.028mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3963.307mil|Location2.X=4129.662mil|Location1.Y=3093.623mil|Location2.Y=3176.417mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3963.307mil|Location2.X=4129.662mil|Location1.Y=3093.623mil|Location2.Y=3176.417mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U2-15(51.819mm,30.824mm) on Top Layer And Pad C10-1(54.794mm,32.102mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.155mil|Location2.X=3956.457mil|Location1.Y=3373.702mil|Location2.Y=3451.451mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3734.155mil|Location2.X=3956.457mil|Location1.Y=3373.702mil|Location2.Y=3451.451mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R8-2(46.424mm,38.438mm) on Top Layer And Pad C11-1(50.395mm,39.088mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2017.599mil|Location2.X=2238.543mil|Location1.Y=3209.842mil|Location2.Y=3284.645mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2017.599mil|Location2.X=2238.543mil|Location1.Y=3209.842mil|Location2.Y=3284.645mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C1-2(3.048mm,34.851mm) on Top Layer And Pad R4-2(6.985mm,34.276mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2015mil|Location2.X=2092.401mil|Location1.Y=3229.527mil|Location2.Y=3558.426mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2015mil|Location2.X=2092.401mil|Location1.Y=3229.527mil|Location2.Y=3558.426mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad S1-2(2.667mm,41.87mm) on Multi-Layer And Pad C1-2(3.048mm,34.851mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3233.859mil|Location2.X=3288.977mil|Location1.Y=4098.142mil|Location2.Y=4355.173mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3233.859mil|Location2.X=3288.977mil|Location1.Y=4098.142mil|Location2.Y=4355.173mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C12-1(33.691mm,57.164mm) on Top Layer And Pad C13-1(33.691mm,61.792mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2684.527mil|Location2.X=3288.977mil|Location1.Y=4098.142mil|Location2.Y=4191.26mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2684.527mil|Location2.X=3288.977mil|Location1.Y=4098.142mil|Location2.Y=4191.26mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C16-1(19.738mm,57.629mm) on Top Layer And Pad C12-1(33.691mm,57.164mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3233.859mil|Location2.X=3288.977mil|Location1.Y=4280.37mil|Location2.Y=4537.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3233.859mil|Location2.X=3288.977mil|Location1.Y=4280.37mil|Location2.Y=4537.401mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C13-1(33.691mm,61.792mm) on Top Layer And Pad C14-2(33.691mm,66.421mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3233.859mil|Location2.X=3588.516mil|Location1.Y=4280.37mil|Location2.Y=4411.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3233.859mil|Location2.X=3588.516mil|Location1.Y=4280.37mil|Location2.Y=4411.236mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C13-1(33.691mm,61.792mm) on Top Layer And Pad U3-1(41.25mm,63.76mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5130.355mil|Location2.X=5582.5mil|Location1.Y=3716.061mil|Location2.Y=3827.446mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5130.355mil|Location2.X=5582.5mil|Location1.Y=3716.061mil|Location2.Y=3827.446mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C15-1(81.862mm,47.459mm) on Top Layer And Pad J3-1(91.948mm,49.173mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4962.008mil|Location2.X=5185.473mil|Location1.Y=3716.061mil|Location2.Y=3953.346mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4962.008mil|Location2.X=5185.473mil|Location1.Y=3716.061mil|Location2.Y=3953.346mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad Q1-2(77.286mm,52.136mm) on Top Layer And Pad C15-1(81.862mm,47.459mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2684.527mil|Location2.X=2739.645mil|Location1.Y=3959.791mil|Location2.Y=4191.26mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2684.527mil|Location2.X=2739.645mil|Location1.Y=3959.791mil|Location2.Y=4191.26mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C17-1(19.738mm,53.65mm) on Top Layer And Pad C16-1(19.738mm,57.629mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2373.779mil|Location2.X=2739.645mil|Location1.Y=3941.26mil|Location2.Y=4034.593mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2373.779mil|Location2.X=2739.645mil|Location1.Y=3941.26mil|Location2.Y=4034.593mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J4-6(12.07mm,52.679mm) on Top Layer And Pad C17-1(19.738mm,53.65mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4545.355mil|Location2.X=4603.385mil|Location1.Y=3852.599mil|Location2.Y=4122.401mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4545.355mil|Location2.X=4603.385mil|Location1.Y=3852.599mil|Location2.Y=4122.401mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C19-1(67.003mm,55.88mm) on Top Layer And Pad C18-1(67.077mm,50.927mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4548.267mil|Location2.X=4825.158mil|Location1.Y=3852.599mil|Location2.Y=3933.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4548.267mil|Location2.X=4825.158mil|Location1.Y=3852.599mil|Location2.Y=3933.543mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C18-1(67.077mm,50.927mm) on Top Layer And Pad R18-1(72.785mm,51.308mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4545.355mil|Location2.X=4600.473mil|Location1.Y=4047.599mil|Location2.Y=4272.441mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4545.355mil|Location2.X=4600.473mil|Location1.Y=4047.599mil|Location2.Y=4272.441mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C19-1(67.003mm,55.88mm) on Top Layer And Pad U4-15(67.145mm,60.456mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2181.457mil|Location2.X=2392.401mil|Location1.Y=3209.842mil|Location2.Y=3274.645mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2181.457mil|Location2.X=2392.401mil|Location1.Y=3209.842mil|Location2.Y=3274.645mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R4-2(6.985mm,34.276mm) on Top Layer And Pad C2-1(10.668mm,34.597mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2317.599mil|Location2.X=2533.478mil|Location1.Y=3219.527mil|Location2.Y=3274.645mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2317.599mil|Location2.X=2533.478mil|Location1.Y=3219.527mil|Location2.Y=3274.645mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C2-1(10.668mm,34.597mm) on Top Layer And Pad U1-8(15.061mm,34.736mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3242.796mil|Location2.X=3467.564mil|Location1.Y=3121.299mil|Location2.Y=3183.503mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3242.796mil|Location2.X=3467.564mil|Location1.Y=3121.299mil|Location2.Y=3183.503mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C3-2(34.168mm,32.282mm) on Top Layer And Pad C4-2(37.977mm,32.102mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2966.852mil|Location2.X=3317.599mil|Location1.Y=3128.385mil|Location2.Y=3270.866mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2966.852mil|Location2.X=3317.599mil|Location1.Y=3128.385mil|Location2.Y=3270.866mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J1-2(27.009mm,34.401mm) on Multi-Layer And Pad C3-2(34.168mm,32.282mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3392.76mil|Location2.X=3617.526mil|Location1.Y=3121.299mil|Location2.Y=3181.417mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3392.76mil|Location2.X=3617.526mil|Location1.Y=3121.299mil|Location2.Y=3181.417mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C4-2(37.977mm,32.102mm) on Top Layer And Pad C6-2(41.786mm,32.229mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2722.599mil|Location2.X=3029.844mil|Location1.Y=3207.874mil|Location2.Y=3279.645mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2722.599mil|Location2.X=3029.844mil|Location1.Y=3207.874mil|Location2.Y=3279.645mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C5-1(20.955mm,34.724mm) on Top Layer And Pad J1-2(27.009mm,34.401mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2722.599mil|Location2.X=2813.543mil|Location1.Y=3224.527mil|Location2.Y=3499.054mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2722.599mil|Location2.X=2813.543mil|Location1.Y=3224.527mil|Location2.Y=3499.054mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C5-1(20.955mm,34.724mm) on Top Layer And Pad R3-1(21.59mm,40.372mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2598.84mil|Location2.X=2797.401mil|Location1.Y=3218.516mil|Location2.Y=3279.645mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2598.84mil|Location2.X=2797.401mil|Location1.Y=3218.516mil|Location2.Y=3279.645mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U1-4(17.287mm,34.011mm) on Top Layer And Pad C5-1(20.955mm,34.724mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3542.722mil|Location2.X=3767.49mil|Location1.Y=3125.619mil|Location2.Y=3181.417mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3542.722mil|Location2.X=3767.49mil|Location1.Y=3125.619mil|Location2.Y=3181.417mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C6-2(41.786mm,32.229mm) on Top Layer And Pad C7-2(45.595mm,32.212mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3692.686mil|Location2.X=3791.241mil|Location1.Y=3125.619mil|Location2.Y=3422.914mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3692.686mil|Location2.X=3791.241mil|Location1.Y=3125.619mil|Location2.Y=3422.914mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C7-2(45.595mm,32.212mm) on Top Layer And Pad R8-2(46.424mm,38.438mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3692.686mil|Location2.X=3895.393mil|Location1.Y=3103.465mil|Location2.Y=3180.737mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3692.686mil|Location2.X=3895.393mil|Location1.Y=3103.465mil|Location2.Y=3180.737mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C7-2(45.595mm,32.212mm) on Top Layer And Pad U2-4(49.669mm,31.249mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4181.327mil|Location2.X=4382.6mil|Location1.Y=2797.125mil|Location2.Y=3173.503mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4181.327mil|Location2.X=4382.6mil|Location1.Y=2797.125mil|Location2.Y=3173.503mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C8-1(58.007mm,23.868mm) on Top Layer And Pad C9-1(61.219mm,32.028mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4181.327mil|Location2.X=4257.981mil|Location1.Y=2596.022mil|Location2.Y=2852.243mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4181.327mil|Location2.X=4257.981mil|Location1.Y=2596.022mil|Location2.Y=2852.243mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C8-1(58.007mm,23.868mm) on Top Layer And Pad S11-1(58.36mm,18.26mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4307.797mil|Location2.X=4862.109mil|Location1.Y=3018.521mil|Location2.Y=3173.503mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4307.797mil|Location2.X=4862.109mil|Location1.Y=3018.521mil|Location2.Y=3173.503mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C9-1(61.219mm,32.028mm) on Top Layer And Pad EN-3(73.497mm,29.643mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3974.5mil|Location2.X=4067.48mil|Location1.Y=2157.125mil|Location2.Y=2331mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3974.5mil|Location2.X=4067.48mil|Location1.Y=2157.125mil|Location2.Y=2331mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad CR1-2(52.292mm,11.049mm) on Top Layer And Pad J2-B1_A12(53.835mm,7.517mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4795.055mil|Location2.X=5201.079mil|Location1.Y=3004.251mil|Location2.Y=3085.575mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4795.055mil|Location2.X=5201.079mil|Location1.Y=3004.251mil|Location2.Y=3085.575mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad EN-3(73.497mm,29.643mm) on Multi-Layer And Pad S5-1(82.687mm,28.7mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3789.528mil|Location2.X=4067.48mil|Location1.Y=2157.125mil|Location2.Y=2204.763mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3789.528mil|Location2.X=4067.48mil|Location1.Y=2157.125mil|Location2.Y=2204.763mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J2-A1_B12(47.435mm,7.517mm) on Top Layer And Pad J2-B1_A12(53.835mm,7.517mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3736.773mil|Location2.X=3815.512mil|Location1.Y=2114.999mil|Location2.Y=2204.763mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3736.773mil|Location2.X=3815.512mil|Location1.Y=2114.999mil|Location2.Y=2204.763mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J2-SH1(46.315mm,6.942mm) on Multi-Layer And Pad J2-A1_B12(47.435mm,7.517mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4041.496mil|Location2.X=4120.235mil|Location1.Y=2114.999mil|Location2.Y=2204.763mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4041.496mil|Location2.X=4120.235mil|Location1.Y=2114.999mil|Location2.Y=2204.763mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J2-B1_A12(53.835mm,7.517mm) on Top Layer And Pad J2-SH2(54.955mm,6.942mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3736.773mil|Location2.X=3780.079mil|Location1.Y=1956.339mil|Location2.Y=2201.613mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3736.773mil|Location2.X=3780.079mil|Location1.Y=1956.339mil|Location2.Y=2201.613mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J2-SH3(46.315mm,2.762mm) on Multi-Layer And Pad J2-SH1(46.315mm,6.942mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.457mil|Location2.X=3780.079mil|Location1.Y=2114.999mil|Location2.Y=2203.858mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.457mil|Location2.X=3780.079mil|Location1.Y=2114.999mil|Location2.Y=2203.858mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R12-1(43.942mm,7.474mm) on Top Layer And Pad J2-SH1(46.315mm,6.942mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4076.928mil|Location2.X=4120.235mil|Location1.Y=1956.339mil|Location2.Y=2201.613mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4076.928mil|Location2.X=4120.235mil|Location1.Y=1956.339mil|Location2.Y=2201.613mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J2-SH4(54.955mm,2.762mm) on Multi-Layer And Pad J2-SH2(54.955mm,6.942mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4076.928mil|Location2.X=4218.543mil|Location1.Y=2114.999mil|Location2.Y=2201.613mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4076.928mil|Location2.X=4218.543mil|Location1.Y=2114.999mil|Location2.Y=2201.613mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J2-SH2(54.955mm,6.942mm) on Multi-Layer And Pad R13-2(57.277mm,7.093mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5527.5mil|Location2.X=5582.5mil|Location1.Y=3814.446mil|Location2.Y=3965.24mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5527.5mil|Location2.X=5582.5mil|Location1.Y=3814.446mil|Location2.Y=3965.24mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J3-1(91.948mm,49.173mm) on Top Layer And Pad J3-8(91.948mm,52.673mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5527.5mil|Location2.X=5805.082mil|Location1.Y=3952.24mil|Location2.Y=4652.72mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5527.5mil|Location2.X=5805.082mil|Location1.Y=3952.24mil|Location2.Y=4652.72mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J3-8(91.948mm,52.673mm) on Top Layer And Pad PTH4-1(95mm,67mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2373.779mil|Location2.X=2446.613mil|Location1.Y=3798.74mil|Location2.Y=3976.693mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2373.779mil|Location2.X=2446.613mil|Location1.Y=3798.74mil|Location2.Y=3976.693mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J4-S1(11.945mm,49.279mm) on Top Layer And Pad J4-6(12.07mm,52.679mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2373.778mil|Location2.X=2446.613mil|Location1.Y=3941.26mil|Location2.Y=4303.464mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2373.778mil|Location2.X=2446.613mil|Location1.Y=3941.26mil|Location2.Y=4303.464mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J4-S2(11.945mm,60.629mm) on Top Layer And Pad J4-6(12.07mm,52.679mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2074.566mil|Location2.X=2435.589mil|Location1.Y=3797.559mil|Location2.Y=3851.496mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2074.566mil|Location2.X=2435.589mil|Location1.Y=3797.559mil|Location2.Y=3851.496mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J4-S3(4.345mm,49.029mm) on Top Layer And Pad J4-S1(11.945mm,49.279mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2050.945mil|Location2.X=2436.77mil|Location1.Y=4240.472mil|Location2.Y=4303.465mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2050.945mil|Location2.X=2436.77mil|Location1.Y=4240.472mil|Location2.Y=4303.465mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J4-S4(3.695mm,60.979mm) on Top Layer And Pad J4-S2(11.945mm,60.629mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2015mil|Location2.X=2137.558mil|Location1.Y=3508.426mil|Location2.Y=3832.992mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2015mil|Location2.X=2137.558mil|Location1.Y=3508.426mil|Location2.Y=3832.992mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad S1-2(2.667mm,41.87mm) on Multi-Layer And Pad J4-S3(4.345mm,49.029mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2001.927mil|Location2.X=2261.773mil|Location1.Y=4268.032mil|Location2.Y=4652.72mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2001.927mil|Location2.X=2261.773mil|Location1.Y=4268.032mil|Location2.Y=4652.72mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J4-S4(3.695mm,60.979mm) on Top Layer And Pad PTH2-1(5mm,67mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2001.927mil|Location2.X=2924.025mil|Location1.Y=1951.927mil|Location2.Y=2211.773mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2001.927mil|Location2.X=2924.025mil|Location1.Y=1951.927mil|Location2.Y=2211.773mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad PTH1-1(5mm,5mm) on Multi-Layer And Pad S7-1(23.383mm,5.85mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5545.234mil|Location2.X=5805.082mil|Location1.Y=1951.927mil|Location2.Y=2447.204mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5545.234mil|Location2.X=5805.082mil|Location1.Y=1951.927mil|Location2.Y=2447.204mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad PTH3-1(95mm,5mm) on Multi-Layer And Pad S4-1(96.5mm,14mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5234.021mil|Location2.X=5805.082mil|Location1.Y=1951.927mil|Location2.Y=2211.773mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5234.021mil|Location2.X=5805.082mil|Location1.Y=1951.927mil|Location2.Y=2211.773mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad S9-1(83.999mm,5.446mm) on Bottom Layer And Pad PTH3-1(95mm,5mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4775.946mil|Location2.X=4993.504mil|Location1.Y=3876.457mil|Location2.Y=3953.346mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4775.946mil|Location2.X=4993.504mil|Location1.Y=3876.457mil|Location2.Y=3953.346mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R18-1(72.785mm,51.308mm) on Top Layer And Pad Q1-2(77.286mm,52.136mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.457mil|Location2.X=3693.543mil|Location1.Y=2154.646mil|Location2.Y=2447.204mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3636.457mil|Location2.X=3693.543mil|Location1.Y=2154.646mil|Location2.Y=2447.204mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad S6-1(43.75mm,14mm) on Bottom Layer And Pad R12-1(43.942mm,7.474mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4161.457mil|Location2.X=4278.7mil|Location1.Y=2139.646mil|Location2.Y=2447.204mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4161.457mil|Location2.X=4278.7mil|Location1.Y=2139.646mil|Location2.Y=2447.204mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R13-2(57.277mm,7.093mm) on Top Layer And Pad S11-1(59.25mm,14mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5155.946mil|Location2.X=5210.708mil|Location1.Y=4205.061mil|Location2.Y=4425.147mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5155.946mil|Location2.X=5210.708mil|Location1.Y=4205.061mil|Location2.Y=4425.147mil|Absolute=True">Un-Routed Net Constraint: Net NetQ1_3 Between Pad R20-2(82.437mm,63.795mm) on Top Layer And Pad R21-2(82.578mm,59.655mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2586.457mil|Location2.X=2813.543mil|Location1.Y=3449.842mil|Location2.Y=3499.054mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2586.457mil|Location2.X=2813.543mil|Location1.Y=3449.842mil|Location2.Y=3499.054mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R2-1(17.272mm,40.372mm) on Top Layer And Pad R3-1(21.59mm,40.372mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5161.496mil|Location2.X=5210.708mil|Location1.Y=4042.061mil|Location2.Y=4262.147mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5161.496mil|Location2.X=5210.708mil|Location1.Y=4042.061mil|Location2.Y=4262.147mil|Absolute=True">Un-Routed Net Constraint: Net NetQ1_3 Between Pad R22-2(82.578mm,55.514mm) on Top Layer And Pad R21-2(82.578mm,59.655mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5080.552mil|Location2.X=5286.102mil|Location1.Y=3811.541mil|Location2.Y=4170.604mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5080.552mil|Location2.X=5286.102mil|Location1.Y=3811.541mil|Location2.Y=4170.604mil|Absolute=True">Un-Routed Net Constraint: Net NetQ1_3 Between Track (82.437mm,51.374mm)(82.437mm,51.474mm) on Top Layer And Pad R22-2(82.578mm,55.514mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4617.875mil|Location2.X=4784.054mil|Location1.Y=4312.992mil|Location2.Y=4478.543mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4617.875mil|Location2.X=4784.054mil|Location1.Y=4312.992mil|Location2.Y=4478.543mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U4-11(68.33mm,62.141mm) on Top Layer And Pad R31-2(71.741mm,65.151mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2181.457mil|Location2.X=2516.162mil|Location1.Y=3140.946mil|Location2.Y=3190.158mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2181.457mil|Location2.X=2516.162mil|Location1.Y=3140.946mil|Location2.Y=3190.158mil|Absolute=True">Un-Routed Net Constraint: Net NetR4_1 Between Pad R4-1(6.985mm,32.526mm) on Top Layer And Pad U1-12(14.337mm,32.511mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2446.457mil|Location2.X=2643.543mil|Location1.Y=2850.946mil|Location2.Y=2904.606mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2446.457mil|Location2.X=2643.543mil|Location1.Y=2850.946mil|Location2.Y=2904.606mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R6-2(13.716mm,25.16mm) on Top Layer And Pad R5-2(17.272mm,25.273mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2586.457mil|Location2.X=2924.025mil|Location1.Y=2806.26mil|Location2.Y=2904.606mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2586.457mil|Location2.X=2924.025mil|Location1.Y=2806.26mil|Location2.Y=2904.606mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R5-2(17.272mm,25.273mm) on Top Layer And Pad S2-1(23.383mm,23.6mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2563.002mil|Location2.X=2643.543mil|Location1.Y=2855.394mil|Location2.Y=3189mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2563.002mil|Location2.X=2643.543mil|Location1.Y=2855.394mil|Location2.Y=3189mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U1-V(16.205mm,32.868mm) on Multi-Layer And Pad R5-2(17.272mm,25.273mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2446.457mil|Location2.X=2545.383mil|Location1.Y=2596.024mil|Location2.Y=2900.158mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2446.457mil|Location2.X=2545.383mil|Location1.Y=2596.024mil|Location2.Y=2900.158mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R6-2(13.716mm,25.16mm) on Top Layer And Pad S3-1(14.86mm,18.26mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4268.092mil|Location2.X=4661.523mil|Location1.Y=2572.362mil|Location2.Y=2611.77mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4268.092mil|Location2.X=4661.523mil|Location1.Y=2572.362mil|Location2.Y=2611.77mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad S11-1(59.543mm,17.742mm) on Bottom Layer And Pad S10-1(68.61mm,18.26mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2762.916mil|Location2.X=4277.492mil|Location1.Y=2924.37mil|Location2.Y=4361.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2762.916mil|Location2.X=4277.492mil|Location1.Y=2924.37mil|Location2.Y=4361.236mil|Absolute=True">Un-Routed Net Constraint: Net NetR32_1 Between Pad S2-2(22.548mm,26.6mm) on Bottom Layer And Pad U3-39(58.75mm,62.49mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2544.054mil|Location2.X=2889.871mil|Location1.Y=2251.536mil|Location2.Y=2447.206mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2544.054mil|Location2.X=2889.871mil|Location1.Y=2251.536mil|Location2.Y=2447.206mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad S3-1(15.75mm,14mm) on Bottom Layer And Pad S7-1(23.61mm,9.51mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5179.741mil|Location2.X=5213.74mil|Location1.Y=2177.479mil|Location2.Y=2860.59mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5179.741mil|Location2.X=5213.74mil|Location1.Y=2177.479mil|Location2.Y=2860.59mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad S9-1(82.687mm,7.7mm) on Bottom Layer And Pad S5-1(83mm,24.5mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3254.314mil|Location2.X=3655.805mil|Location1.Y=2572.362mil|Location2.Y=2612.203mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3254.314mil|Location2.X=3655.805mil|Location1.Y=2572.362mil|Location2.Y=2612.203mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad S8-1(33.793mm,17.742mm) on Bottom Layer And Pad S6-1(43.437mm,18.2mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2693.762mil|Location2.X=4343.509mil|Location1.Y=2157.048mil|Location2.Y=4390.753mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2693.762mil|Location2.X=4343.509mil|Location1.Y=2157.048mil|Location2.Y=4390.753mil|Absolute=True">Un-Routed Net Constraint: Net NetR37_1 Between Pad S7-2(21.813mm,9.45mm) on Bottom Layer And Track (58.636mm,61.106mm)(58.75mm,61.22mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2563.002mil|Location2.X=2632.304mil|Location1.Y=3200mil|Location2.Y=3229.54mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2563.002mil|Location2.X=2632.304mil|Location1.Y=3200mil|Location2.Y=3229.54mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U1-V(16.205mm,33.655mm) on Multi-Layer And Pad U1-4(17.287mm,34.011mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2522.454mil|Location2.X=2552.002mil|Location1.Y=3200mil|Location2.Y=3269.304mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2522.454mil|Location2.X=2552.002mil|Location1.Y=3200mil|Location2.Y=3269.304mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U1-8(15.061mm,34.736mm) on Top Layer And Pad U1-V(15.418mm,33.655mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3885.551mil|Location2.X=3926.89mil|Location1.Y=3010.945mil|Location2.Y=3127.087mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3885.551mil|Location2.X=3926.89mil|Location1.Y=3010.945mil|Location2.Y=3127.087mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U2-4(49.669mm,31.249mm) on Top Layer And Pad U2-10(50.419mm,29.499mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3885.551mil|Location2.X=3986.929mil|Location1.Y=3093.623mil|Location2.Y=3127.087mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3885.551mil|Location2.X=3986.929mil|Location1.Y=3093.623mil|Location2.Y=3127.087mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U2-4(49.669mm,31.249mm) on Top Layer And Pad U2-15(51.819mm,30.824mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3529.516mil|Location2.X=3806.83mil|Location1.Y=4128.918mil|Location2.Y=4411.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3529.516mil|Location2.X=3806.83mil|Location1.Y=4128.918mil|Location2.Y=4411.236mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U3-1(41.25mm,63.76mm) on Top Layer And Pad U3-42(47.1mm,57.44mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3529.516mil|Location2.X=5023.779mil|Location1.Y=2961.22mil|Location2.Y=3861.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3529.516mil|Location2.X=5023.779mil|Location1.Y=2961.22mil|Location2.Y=3861.236mil|Absolute=True">Un-Routed Net Constraint: Net NetR35_1 Between Pad U3-12(41.25mm,49.79mm) on Top Layer And Via (78.105mm,27.686mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3712.504mil|Location2.X=4478.779mil|Location1.Y=2521.22mil|Location2.Y=3725.524mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3712.504mil|Location2.X=4478.779mil|Location1.Y=2521.22mil|Location2.Y=3725.524mil|Absolute=True">Un-Routed Net Constraint: Net NetR40_1 Between Pad U3-17(45.555mm,46mm) on Top Layer And Via (64.262mm,16.51mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4041.22mil|Location2.X=4094.504mil|Location1.Y=2526.22mil|Location2.Y=3725.524mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4041.22mil|Location2.X=4094.504mil|Location1.Y=2526.22mil|Location2.Y=3725.524mil|Absolute=True">Un-Routed Net Constraint: Net NetR41_1 Between Via (53.848mm,16.637mm) from Top Layer to Bottom Layer And Pad U3-24(54.445mm,46mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3365mil|Location2.X=4347.992mil|Location1.Y=2595.552mil|Location2.Y=4245.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3365mil|Location2.X=4347.992mil|Location1.Y=2595.552mil|Location2.Y=4245.236mil|Absolute=True">Un-Routed Net Constraint: Net NetR36_1 Between Track (38.862mm,20.588mm)(38.975mm,20.701mm) on Top Layer And Pad U3-35(58.75mm,57.41mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4218.492mil|Location2.X=4632.441mil|Location1.Y=4312.992mil|Location2.Y=4411.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4218.492mil|Location2.X=4632.441mil|Location1.Y=4312.992mil|Location2.Y=4411.236mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U3-40(58.75mm,63.76mm) on Top Layer And Pad U4-11(68.33mm,62.141mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3771.83mil|Location2.X=3861.948mil|Location1.Y=4073.8mil|Location2.Y=4108.8mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3771.83mil|Location2.X=3861.948mil|Location1.Y=4073.8mil|Location2.Y=4108.8mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U3-43(47.1mm,56.04mm) on Top Layer And Pad U3-41(48.5mm,56.04mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.948mil|Location2.X=3861.948mil|Location1.Y=4073.8mil|Location2.Y=4163.918mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.948mil|Location2.X=3861.948mil|Location1.Y=4073.8mil|Location2.Y=4163.918mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U3-41(48.5mm,56.04mm) on Top Layer And Pad U3-49(48.5mm,57.44mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3771.83mil|Location2.X=3806.83mil|Location1.Y=4073.8mil|Location2.Y=4163.918mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3771.83mil|Location2.X=3806.83mil|Location1.Y=4073.8mil|Location2.Y=4163.918mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U3-43(47.1mm,56.04mm) on Top Layer And Pad U3-42(47.1mm,57.44mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3771.83mil|Location2.X=3806.83mil|Location1.Y=4018.682mil|Location2.Y=4108.8mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3771.83mil|Location2.X=3806.83mil|Location1.Y=4018.682mil|Location2.Y=4108.8mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U3-44(47.1mm,54.64mm) on Top Layer And Pad U3-43(47.1mm,56.04mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3771.83mil|Location2.X=3861.948mil|Location1.Y=4018.682mil|Location2.Y=4053.682mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3771.83mil|Location2.X=3861.948mil|Location1.Y=4018.682mil|Location2.Y=4053.682mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U3-44(47.1mm,54.64mm) on Top Layer And Pad U3-45(48.5mm,54.64mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3882.068mil|Location2.X=3917.068mil|Location1.Y=4018.682mil|Location2.Y=4108.8mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3882.068mil|Location2.X=3917.068mil|Location1.Y=4018.682mil|Location2.Y=4108.8mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U3-46(49.9mm,54.64mm) on Top Layer And Pad U3-47(49.9mm,56.04mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3882.068mil|Location2.X=3917.068mil|Location1.Y=4073.8mil|Location2.Y=4163.918mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3882.068mil|Location2.X=3917.068mil|Location1.Y=4073.8mil|Location2.Y=4163.918mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U3-47(49.9mm,56.04mm) on Top Layer And Pad U3-48(49.9mm,57.44mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.948mil|Location2.X=3917.068mil|Location1.Y=4128.918mil|Location2.Y=4163.918mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3826.948mil|Location2.X=3917.068mil|Location1.Y=4128.918mil|Location2.Y=4163.918mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U3-49(48.5mm,57.44mm) on Top Layer And Pad U3-48(49.9mm,57.44mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3041.22mil|Location2.X=3588.516mil|Location1.Y=2526.22mil|Location2.Y=4211.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3041.22mil|Location2.X=3588.516mil|Location1.Y=2526.22mil|Location2.Y=4211.236mil|Absolute=True">Un-Routed Net Constraint: Net NetR38_1 Between Via (28.448mm,16.637mm) from Top Layer to Bottom Layer And Pad U3-5(41.25mm,58.68mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3529.516mil|Location2.X=5013.779mil|Location1.Y=2106.22mil|Location2.Y=4111.236mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3529.516mil|Location2.X=5013.779mil|Location1.Y=2106.22mil|Location2.Y=4111.236mil|Absolute=True">Un-Routed Net Constraint: Net NetR39_1 Between Pad U3-7(41.25mm,56.14mm) on Top Layer And Via (77.851mm,5.969mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4611.378mil|Location2.X=4658.622mil|Location1.Y=4251.378mil|Location2.Y=4350mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4611.378mil|Location2.X=4658.622mil|Location1.Y=4251.378mil|Location2.Y=4350mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U4-11(68.33mm,62.141mm) on Top Layer And Pad U4-17(68.58mm,60.706mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4560mil|Location2.X=4658.622mil|Location1.Y=4251.378mil|Location2.Y=4298.622mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4560mil|Location2.X=4658.622mil|Location1.Y=4251.378mil|Location2.Y=4298.622mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U4-15(67.145mm,60.456mm) on Top Layer And Pad U4-17(68.58mm,60.706mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4611.378mil|Location2.X=4658.622mil|Location1.Y=4200mil|Location2.Y=4298.622mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4611.378mil|Location2.X=4658.622mil|Location1.Y=4200mil|Location2.Y=4298.622mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U4-17(68.58mm,60.706mm) on Top Layer And Pad U4-3(68.83mm,59.271mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4590mil|Location2.X=5245mil|Location1.Y=3780.158mil|Location2.Y=3775mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4590mil|Location2.X=5245mil|Location1.Y=3780.158mil|Location2.Y=3775mil|Absolute=True">Un-Routed Net Constraint: Net +3V3 Between Track (69.977mm,50.677mm)(69.977mm,50.927mm) on Top Layer And Via (81.534mm,45.466mm) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID0NOUOJYTTYKIB0EBZ5JLTEZNYKFLR1DGOOVYGOLL0AR3K1K30VBK"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4823.885mil|Location2.X=4835.135mil|Location1.Y=3748.858mil|Location2.Y=3760.108mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\ANAHUAC_7S\Diseno de PCBs\RA_Proyecto_00504730_Guereca\GEMAS-Guereca Entertainment Mini Arcade System\PCB_GEMAS_ETAPA_FINAL_copia.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4823.885mil|Location2.X=4835.135mil|Location1.Y=3748.858mil|Location2.Y=3760.108mil|Absolute=True">Silk To Silk Clearance Constraint: (0.028mm &lt; 0.254mm) Between Arc (73.497mm,47.222mm) on Top Overlay And Text "R18" (72.01mm,47.625mm) on Top Overlay Silk Text to Silk Clearance [0.028mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

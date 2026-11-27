@@ -1,0 +1,23 @@
+Output: Gerber X2 Files
+Type  : GerberX2
+From  : Variant [[No Variations]] of Project [GEMAS-Guereca Entertainment Mini Arcade System.PrjPcb]
+   Generated File[PCB_GEMAS_V2(RevisaEsta)_Copper_Signal_Top.gbr]
+   Generated File[PCB_GEMAS_V2(RevisaEsta)_Copper_Signal_Bot.gbr]
+   Generated File[PCB_GEMAS_V2(RevisaEsta)_Legend_Top.gbr]
+   Generated File[PCB_GEMAS_V2(RevisaEsta)_Legend_Bot.gbr]
+   Generated File[PCB_GEMAS_V2(RevisaEsta)_Soldermask_Top.gbr]
+   Generated File[PCB_GEMAS_V2(RevisaEsta)_Soldermask_Bot.gbr]
+   Generated File[PCB_GEMAS_V2(RevisaEsta)_Paste_Top.gbr]
+   Generated File[PCB_GEMAS_V2(RevisaEsta)_Paste_Bot.gbr]
+   Generated File[PCB_GEMAS_V2(RevisaEsta)_Mechanical_1.gbr]
+   Generated File[PCB_GEMAS_V2(RevisaEsta)_Profile.gbr]
+   Generated File[PCB_GEMAS_V2(RevisaEsta)_NPTH_Drill.gbr]
+   Generated File[PCB_GEMAS_V2(RevisaEsta)_PTH_Drill.gbr]
+   Generated File[PCB_GEMAS_V2(RevisaEsta).EXTREP]
+   Generated File[PCB_GEMAS_V2(RevisaEsta).REP]
+
+
+Files Generated   : 14
+Documents Printed : 0
+
+Finished Output Generation At 12:09:19 AM On 11/6/2026

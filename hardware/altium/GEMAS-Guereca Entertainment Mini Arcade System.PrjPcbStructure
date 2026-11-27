@@ -1,0 +1,6 @@
+Record=TopLevelDocument|FileName=Alimentacion.SchDoc|SheetNumber=1
+Record=NoMainPathDocument|SourceDocument=Alimentacion.SchDoc|FileName=Audio.SchDoc|SheetNumber=5
+Record=NoMainPathDocument|SourceDocument=Alimentacion.SchDoc|FileName=Controles.SchDoc|SheetNumber=6
+Record=NoMainPathDocument|SourceDocument=Alimentacion.SchDoc|FileName=ESP32.SchDoc|SheetNumber=3
+Record=NoMainPathDocument|SourceDocument=Alimentacion.SchDoc|FileName=Pantalla_microSD.SchDoc|SheetNumber=4
+Record=NoMainPathDocument|SourceDocument=Alimentacion.SchDoc|FileName=USB-C.SchDoc|SheetNumber=2
